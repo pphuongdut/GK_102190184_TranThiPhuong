@@ -63,28 +63,23 @@ namespace GK_102190184_TranThiPhuong
 
         private void btn_confirm_Click(object sender, EventArgs e)
         {
-            if (txt_magv.Text == "" || txt_tengv.Text == "" || txt_SDT.Text == "" || cbbCoSo.SelectedItem == null)
+            if ( validateForm() != 0 )
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin ");
-               
-
+                switch(validateForm())
+                {
+                    case 1:
+                        MessageBox.Show("Vui lòng nhập đầy đủ thông tin ");
+                        break;
+                    case 2:
+                        MessageBox.Show("Vui Lòng Nhập Mã GV không chứa kí tự!");
+                        break;
+                    case 3:
+                        MessageBox.Show("Vui Lòng Nhập Đúng Định Dạng SDT !");
+                        break;
+                }    
             }
             else
             {
-                for(int i = 0; i < txt_magv.Text.Length; i++)
-                {
-                    if(char.IsLetter(txt_magv.Text[i]) == true)
-                    {
-                        MessageBox.Show("Vui Lòng Nhập Ma GV không chứa kí tự!");
-                        return;
-                    }
-               
-                }    
-                if (txt_SDT.Text.Length != 10 && txt_SDT.Text[0] != 0)
-                {
-                    MessageBox.Show("Vui Lòng Nhập Đúng Định Dạng SDT !");
-                    return;
-                }
                 if (MaGV != -1)
                 {
                     CSDL_OOP.Instance.updateGV(setGV());
@@ -124,6 +119,28 @@ namespace GK_102190184_TranThiPhuong
             s.NgaySinh = dtp_ngaysinh.Value;
             s.MaCoSo = ((CBB_Item)cbbCoSo.SelectedItem).Value;
             return s;
+        }
+        private int validateForm()
+        {
+            if (txt_magv.Text == "" || txt_tengv.Text == "" || txt_SDT.Text == "" || cbbCoSo.SelectedItem == null)
+            {
+              
+                return 1;
+
+            }
+            for (int i = 0; i < txt_magv.Text.Length; i++)
+            {
+                if (char.IsLetter(txt_magv.Text[i]) == true)
+                {
+                    return 2;
+                }
+
+            }
+            if (txt_SDT.Text.Length != 10 && txt_SDT.Text[0] != 0)
+            {
+                return 3;
+            }
+            return 0;
         }
     }
 }
