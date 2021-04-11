@@ -200,30 +200,9 @@ namespace GK_102190184_TranThiPhuong
             }
             return l;
         }
-
-        public List<GV> getGVbyMaCoSo(string MaCoSo)
-        {
-            List<GV> ListGV = setAllGV();
-            List<GV> list = new List<GV>();
-
-            if (MaCoSo == "00000")
-            {
-                list = ListGV;
-            }
-            else
-            {
-                foreach (GV i in ListGV)
-                {
-                    if (Convert.ToInt32(i.MaCoSo) == Convert.ToInt32(MaCoSo))
-                    {
-                        list.Add(i);
-                    }
-                }
-            }
-            return list;
-        }
-
-
+       
+      
+        
         public GV get1GV(int MaGV)
         {
 
@@ -250,7 +229,28 @@ namespace GK_102190184_TranThiPhuong
             return null;
            
         }
-      
+        public List<GV> getGVbyMaCoSo(string MaCoSo)
+        {
+            List<GV> ListGV = setAllGV();
+            List<GV> list = new List<GV>();
+
+            if (MaCoSo == "00000")
+            {
+                list = ListGV;
+            }
+            else
+            {
+                foreach (GV i in ListGV)
+                {
+                    if ( Convert.ToInt32(i.MaCoSo) == Convert.ToInt32(MaCoSo))
+                    {
+                        list.Add(i);
+                    }
+                }
+            }
+            return list;
+        }
+       
         public bool isExist( int MaGV)
         {
             List<GV> ListBaiHat = setAllGV();

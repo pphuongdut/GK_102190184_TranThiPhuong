@@ -71,9 +71,18 @@ namespace GK_102190184_TranThiPhuong
             }
             else
             {
+                for(int i = 0; i < txt_magv.Text.Length; i++)
+                {
+                    if(char.IsLetter(txt_magv.Text[i]) == true)
+                    {
+                        MessageBox.Show("Vui Lòng Nhập Ma GV không chứa kí tự!");
+                        return;
+                    }
+               
+                }    
                 if (txt_SDT.Text.Length != 10 && txt_SDT.Text[0] != 0)
                 {
-                    MessageBox.Show("Vui Lòng Nhập Đúng Định Dạng SDT ! ," + txt_SDT.Text[0] + "," + txt_SDT.Text.Length);
+                    MessageBox.Show("Vui Lòng Nhập Đúng Định Dạng SDT !");
                     return;
                 }
                 if (MaGV != -1)
@@ -81,7 +90,6 @@ namespace GK_102190184_TranThiPhuong
                     CSDL_OOP.Instance.updateGV(setGV());
                     MessageBox.Show("Chỉnh sửa GV thành công !");
                     asyncData(this.MaCS);
-                    // CHỖ DELEGATE NÀY CHẠY OKE NÈ
                     this.Dispose();
                 }
                 else
@@ -91,7 +99,6 @@ namespace GK_102190184_TranThiPhuong
                         MessageBox.Show("Thêm GV thành công !");
                         string mcs = setGV().MaCoSo;
                         asyncData(this.MaCS);
-                        // MÀ CHỖ DELEGATE NÀY Y CHANG CHẠY LỖI
                         this.Dispose();
                     }
                     else
